@@ -14,6 +14,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Paths
+
+//Home path
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
+
+//Long/Lat Path
 app.get("/api/:latitude/:longitude", function(req, res) {
     var latitude = req.params.latitude;
     var longitude = req.params.longitude;
@@ -23,7 +30,7 @@ app.get("/api/:latitude/:longitude", function(req, res) {
 })
 
 // Static directory
-app.use(express.static("public"));
+app.use('/', express.static("public"));
 
 // Starts the server to begin listening
 // =============================================================
