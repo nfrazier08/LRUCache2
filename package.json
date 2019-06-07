@@ -8,7 +8,8 @@
     "express": "^4.17.1",
     "express-generator": "^4.16.1",
     "lru-cache": "^5.1.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "yallist": "^3.0.3"
   },
   "devDependencies": {},
   "scripts": {
