@@ -24,3 +24,5 @@ itemCount - Return total quantity of objects currently in cache. Note, that stal
 dump() - Return an array of the cache entries ready for serialization and usage with 'destinationCache.load(arr)`.
 
 load(cacheEntriesArray) - Loads another cache entries array, obtained with sourceCache.dump(), into the cache. The destination cache is reset before loading new entries
+
+https://www.npmjs.com/package/yallist
