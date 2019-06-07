@@ -14,25 +14,22 @@ var LRU = require("lru-cache")
               , updateAgeOnGet: true } //When using time-expiring entries with maxAge, setting this to true will make each item's effective time update to the current time whenever it is retrieved from cache, causing it to not expire. (It can still fall out of cache based on recency of use, of course.)
    , cache = new LRU(options)   
    console.log(cache.length, "cache length")
-   //, otherCache = new LRU(50) // sets just the max size
 
+   var marsImagesObject = {}
 
-//cache.set("key", "value")
-//cache.get("key") // "value"
+   //Set test items for the cache
+   cache.set(marsImagesObject, "image 1")
+   cache.set(marsImagesObject, "image 2")
+   cache.set(marsImagesObject, "image 3")
 
-//probably want "some object to be mars image object"
-// var someObject = { a: 1 }
-// cache.set(someObject, 'a value')
-// Object keys are not toString()-ed
-// cache.set('[object Object]', 'a different value')
-// assert.equal(cache.get(someObject), 'a value')
-// A similar object with same keys/values won't work,
-// because it's a different object identity
-// assert.equal(cache.get({ a: 1 }), undefined)
-
-// cache.reset() 
-
-
+   //What is the cache length now?
+   //This returns NaN
+   console.log(cache, "now?")
+    
+   //This does return image 1/image 2 when I was setting the cache as
+    //    cache.set(-90, "image 3")
+    //    console.log(cache.get(-90))
+    //    console.log(cache.get(-45))
 
 
 
@@ -48,20 +45,26 @@ app.use(bodyParser.json());
 //Paths
 
 //Home path
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 
+// Get all images from cache
+app.get("/all", (req, res)  => {
+    res.json(cache.get(1));
+  });
+
 //Long/Lat Path
-app.get("/api/mars/:latitude/:longitude", function(req, res) {
+app.get("/api/mars/:latitude/:longitude", (req, res) => {
     //These are the parameters and they need to be numbers
     var latitude = parseInt(req.params.latitude);
     var longitude = parseInt(req.params.longitude);
+    error = {}
 
     //error handling
     //Latitude -90 to 90
     if(latitude > 90){
-        //lat is accepted accepted range
+        error.latitude = 'lat is above accepted range'
     } else if (latitude < -90){
         //lat is below accepted range
     } else if (isNaN(latitude)){
@@ -72,7 +75,7 @@ app.get("/api/mars/:latitude/:longitude", function(req, res) {
 
     //Long -180 to 180
     if(longitude > 180){
-        //long is above accepted range
+        error.longitude = 'lat is above accepted range'
     } else if (longitude < -180){
         //long is below accepted range
     } else if (isNaN(longitude)){
