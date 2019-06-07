@@ -3,6 +3,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
+//Will need to call in LRU Cache NPM
 
 // Sets up the Express App
 // =============================================================
@@ -21,12 +22,33 @@ app.get('/', function(req, res) {
 });
 
 //Long/Lat Path
-app.get("/api/:latitude/:longitude", function(req, res) {
-    var latitude = req.params.latitude;
-    var longitude = req.params.longitude;
+app.get("/api/mars/:latitude/:longitude", function(req, res) {
+    //These are the parameters and they need to be numbers
+    var latitude = parseInt(req.params.latitude);
+    var longitude = parseInt(req.params.longitude);
 
-    console.log(latitude)
-    console.log(longitude)
+    //error handling
+    //Latitude -90 to 90
+    //Long -180 to 180
+    if(latitude)
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 })
 
 // Static directory
