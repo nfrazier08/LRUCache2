@@ -24,6 +24,7 @@ let cache = new Cache(3);
 cache.set('a', '7');
 cache.set('b', '5');
 cache.set('c', '3');
+console.log(cache)
 
 function determineKeyFromLatLongInputs(latitude, longitude){
     
@@ -38,6 +39,7 @@ function determineKeyFromLatLongInputs(latitude, longitude){
         key = 'c'
     }
     
+    //return key
     getImageURL(key)
 }
 
