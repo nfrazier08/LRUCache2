@@ -77,7 +77,7 @@ app.get("/api/mars/:latitude/:longitude", (req, res) => {
     if(longitude > 180){
         error.longitude = 'lat is above accepted range'
     } else if (longitude < -180){
-        //long is below accepted range
+        //long is below accepted ranges
     } else if (isNaN(longitude)){
         //Long input is not an integer
     } else{
@@ -85,6 +85,7 @@ app.get("/api/mars/:latitude/:longitude", (req, res) => {
     }
 
     //begin calling in image from LRU cache
+    //I would like a json object
 
 
     //function
