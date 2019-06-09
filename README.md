@@ -27,9 +27,11 @@ https://www.npmjs.com/package/lru-cache-node
 Walk-through:
 Since the defined cache size for this assignment was large, I tested with a smaller cache size of 3 and manually set values:
 
-cache.set('a', '7');
-cache.set('b', '5');
-cache.set('c', '3');
+[
+    cache.set('a', '7');
+    cache.set('b', '5');
+    cache.set('c', '3');
+]
 
 When a user hits "/api/mars/:latitude/:longitude", I first validate that the inputs are within the specified range (latitude: -90 to 90; longitude: -180 to 180). If the inputs check out, I call the determineKeyFromLatLongInputs function. 
 
