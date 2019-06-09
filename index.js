@@ -1,48 +1,36 @@
+//https://www.npmjs.com/package/lru-cache-node
+
 // Dependencies
 // =============================================================
-var express = require("express");
-var bodyParser = require("body-parser");
-var path = require("path");
-
-//LRU Cache NPM
-var LRU = require("lru-cache")
-    , options = { max: 2 //maximum size of the cache; length of all values in the cache
-    , length: function (n, key) { return n * 2 + key.length } //lenth is a function that is used to calculate length of stored items
-              , dispose: function (key, n) { n.close() } //A function called when items are dropped from the cache; clean up tasks when items are no longer available;called before items are actually removed
-              , maxAge: 1000 * 60 * 60 
-              , stale: true 
-              , updateAgeOnGet: true } //When using time-expiring entries with maxAge, setting this to true will make each item's effective time update to the current time whenever it is retrieved from cache, causing it to not expire. (It can still fall out of cache based on recency of use, of course.)
-   , cache = new LRU(options)   
-   console.log(cache.length, "cache length")
-
-   var marsImagesObject = {}
-
-   //Set test items for the cache
-   cache.set(marsImagesObject, "image 1")
-   cache.set(marsImagesObject, "image 2")
-   cache.set(marsImagesObject, "image 3")
-
-   //What is the cache length now?
-   //This returns NaN
-   console.log(cache, "now?")
-    
-   //This does return image 1/image 2 when I was setting the cache as
-    //    cache.set(-90, "image 3")
-    //    console.log(cache.get(-90))
-    //    console.log(cache.get(-45))
-
-
+const express = require("express");
+const bodyParser = require("body-parser");
+const path = require("path");
+const Cache = require("lru-cache-node")
 
 // Sets up the Express App
 // =============================================================
-var app = express();
-var PORT = 3000;
+const app = express();
+const PORT = 3000;
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//Paths
+//Set up cache
+let cache = new Cache(3);
+
+cache.set('a', 7);
+cache.set('b', 5);
+cache.set('c', 3);
+console.log(cache);
+console.log("setting 10");
+cache.set('d', 10);
+console.log("cache");
+console.log(cache);
+
+
+//PATHS
+
 
 //Home path
 app.get('/', (req, res) => {
